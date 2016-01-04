@@ -55,6 +55,7 @@ var Note = React.createClass({
     for(var i = 0; i < this.state.notes.length; i++){
       notes.push(<div className='col m3'>
                     <div className='card yellow darken-2'>
+                    <a className="btn-floating right yellow darken-2 white-text"><i className="material-icons">close</i></a>
                       <div className='card-title white-text center'>
                       {this.state.notes[i].title}
                       </div>
