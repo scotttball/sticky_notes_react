@@ -50,22 +50,35 @@ var Note = React.createClass({
     }
   },
 
-  displayNotes: function() {
-    var notes = [];
-    for(var i = 0; i < this.state.notes.length; i++){
+  deleteNote: function(id){
+    var self = this;
+    $.ajax({
+      url: '/notes/' + id,
+      type: 'DELETE',
+      success: function(data){
+        debugger
+        self.setState({notes: data})
+      }
+    })
+  },
+
+  displayNotes: function(){
+    var notes =[];
+    var self = this;
+    this.state.notes.forEach(function(note){
       notes.push(<div className='col m3'>
                     <div className='card yellow darken-2'>
-                    <a className="btn-floating right yellow darken-2 white-text"><i className="material-icons">close</i></a>
-                      <div className='card-title white-text center'>
-                      {this.state.notes[i].title}
-                      </div>
-                      <div className='card-content'>
-                       {this.state.notes[i].description}
-                      </div>
+                      <a className="btn-floating right yellow darken-2 white-text" onClick={ () => self.deleteNote(note.id)}><i className="material-icons">close</i></a>
+                        <div className='card-title white-text center'>
+                        {note.title}
+                        </div>
+                        <div className='card-content'>
+                         {note.description}
+                        </div>
                     </div>
                   </div>
-                    );
-    }
+                  )
+    })
     return notes;
   },
 
