@@ -30,7 +30,7 @@ var Note = React.createClass({
       data: {note: {title: this.state.noteTitle, description: this.state.noteDescription}},
       success: function(data) {
         var notes = self.state.notes;
-        notes.push({title: data.title, description: data.description});
+        notes.push({id: data.id, title: data.title, description: data.description});
         self.setState({notes: notes, showAdd: false, noteTitle: null});
       }
     });
@@ -56,7 +56,6 @@ var Note = React.createClass({
       url: '/notes/' + id,
       type: 'DELETE',
       success: function(data){
-        debugger
         self.setState({notes: data})
       }
     })
